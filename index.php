@@ -48,7 +48,7 @@
 		</div>
 		<div class="col-md-6" id="main_content">
 			<center><h3><u>User Login</u></h3></center>
-			<form action="register.php" method="post">
+			<form action="login.php" method="post">
                 <!-- Email -->
 				<div class="form-group">
 					<label for="email">Email ID:</label>

@@ -70,7 +70,6 @@
 					<input type="text" name="mobile" class="form-control" required>
 				</div>
 				<button type="submit" name="register" class="btn btn-primary">Register</button> 
-				<!-- <a href="signup.php"> Not registered yet ?</a>	 -->
 			</form>
 		</div>
 	</div>
