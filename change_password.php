@@ -25,7 +25,7 @@
                 <a href="" class="nav-link dropdown toggle" data-toggle = "dropdown">My Profile</a>
                     <div class="dropdown-menu">
                         <a href="view_profile.php" class="dropdown-item">View Profile</a>
-                        <!-- <a href="edit_profile.php" class="dropdown-item">Edit Profile</a> -->
+                        <a href="edit_profile.php" class="dropdown-item">Edit Profile</a>
                         <a href="change_password.php" class="dropdown-item">Change Password</a>
                     </div>
               </li>
