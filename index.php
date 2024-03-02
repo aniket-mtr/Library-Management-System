@@ -1,3 +1,6 @@
+<?php
+	session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -64,5 +67,12 @@
 			</form>
 		</div>
 	</div>
+	<?php
+    // Display error message if set. (Incorrect credentials)
+    if (isset($_SESSION['login_error'])) {
+        echo "<p><center><b>{$_SESSION['login_error']}</b></center></p>";
+        unset($_SESSION['login_error']); // Clear the session variable after displaying the message
+    }
+    ?>
 </body>
 </html>
