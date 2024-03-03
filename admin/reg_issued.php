@@ -1,6 +1,16 @@
 <?php
   require('functions.php');
 	session_start();
+    $connection = mysqli_connect('localhost', 'root', '', 'lms_main');
+    $isbn = ""; $book_name = ""; $user_id = ""; $user_name = ""; $issue_date = ""; $due_date = "";
+    $current_date = date('Y-m-d');
+
+$query = "SELECT b.isbn as isbn, b.book_name as book_name, u.id as user_id, u.name as user_name, ib.issue_date as issue_date, ib.due_date as due_date
+          FROM books b
+          JOIN issued_books ib ON b.isbn = ib.isbn
+          JOIN users u ON ib.user_id = u.id;";
+
+          $query_run = mysqli_query($connection, $query);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -10,7 +20,7 @@
     <link rel="stylesheet" type="text/css" href="../bootstrap-4.4.1/css/bootstrap.min.css">
   	<script type="text/javascript" src="../bootstrap-4.4.1/js/juqery_latest.js"></script>
   	<script type="text/javascript" src="../bootstrap-4.4.1/js/bootstrap.min.js"></script>
-    <title>Admin Dashboard</title>
+    <title>Issue Books</title>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -68,53 +78,50 @@
         </ul>
       </div>
     </nav><br>
-
     <div class="row">
-        <div class="col-md-3">
-          <div class="card bg-light" style="width : 300px; margin-left:30px">
-            <div class="card-header">Registered Users</div>
-            <div class="card-body">
-              <p class="card-text">No. of total users: <?php echo "".get_user_count(); ?></p>
-              <a href="reg_users.php" class="btn btn-primary" target="_blank">View Registered Users</a>
-            </div>
-          </div>
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <form>
+                <table class="table-bordered" width="900px" style="text-align: center;">
+                    <tr>
+                        <th>ISBN</th>
+                        <th>Book</th>
+                        <th>User ID</th>
+                        <th>User Name</th>
+                        <th>Issue Date</th>
+                        <th>Due Date</th>
+                        <th>Status</th>
+                    </tr>
+                    <?php
+                    $current_date = date('Y-m-d');
+                        $query_run = mysqli_query($connection, $query);
+                        while ($row = mysqli_fetch_assoc($query_run)) {
+                            $isbn = $row['isbn'];
+                            $book_name = $row['book_name'];
+                            $user_id = $row['user_id'];
+                            $user_name = $row['user_name'];
+                            $issue_date = $row['issue_date'];
+                            $due_date = $row['due_date'];
+                        }
+                    
+                            // Determine return status based on due date
+                            $return_status = ($current_date > $due_date) ? "Not Returned" : "Returned";
+                    
+                            // Output the data
+                            echo "<tr>
+                                <td>$isbn</td>
+                                <td>$book_name</td>
+                                <td>$user_id</td>
+                                <td>$user_name</td>
+                                <td>$issue_date</td>
+                                <td>$due_date</td>
+                                <td>$return_status</td>
+                                </tr>";
+                    ?>
+                </table>
+            </form>
         </div>
-        <div class="col-md-3">
-          <div class="card bg-light" style="width : 300px; margin-left:30px">
-            <div class="card-header">Registered Books</div>
-            <div class="card-body">
-              <p class="card-text">No. of available books: <?php echo "".get_book_count(); ?></p>
-              <a href="reg_books.php" class="btn btn-danger" target="_blank">View Registered Books</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-3">
-          <div class="card bg-light" style="width : 300px; margin-left:30px">
-            <div class="card-header">Registered Categories</div>
-            <div class="card-body">
-              <p class="card-text">No. of total categories: <?php echo "".get_category_count(); ?></p>
-              <a href="reg_categories.php" class="btn btn-primary" target="_blank">View Categories</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-3">
-          <div class="card bg-light" style="width : 300px; margin-left:30px">
-            <div class="card-header">Registered Authors</div>
-            <div class="card-body">
-              <p class="card-text">No. of authors: <?php echo "".get_author_count(); ?></p>
-              <a href="reg_authors.php" class="btn btn-danger" target="_blank">View Registered Authors</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-3">
-          <div class="card bg-light" style="width : 300px; margin-left:30px; margin-top: 50px;">
-            <div class="card-header">Issued Books</div>
-            <div class="card-body">
-              <p class="card-text">No. of issued books: <?php echo "".get_issue_count(); ?></p>
-              <a href="reg_issued.php" class="btn btn-success" target="_blank">View Issued Books</a>
-            </div>
-          </div>
-        </div>
+        <div class="col-md-2"></div>
     </div>
 </body>
 </html>

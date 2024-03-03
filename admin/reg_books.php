@@ -1,6 +1,11 @@
 <?php
   require('functions.php');
 	session_start();
+    $connection = mysqli_connect('localhost', 'root', '', 'lms_main');
+    $isbn=""; $book_name=""; $author_name=""; $category=""; $copies=""; $price="";
+    $query = "select books.isbn as isbn, books.book_name as book_name, authors.author_name as author_name, category.category_name as category, books.book_copies as copies, books.book_price 
+                as price from books left join authors on books.author_id = authors.author_id
+                left join category on books.category_id = category.category_id;";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -10,7 +15,7 @@
     <link rel="stylesheet" type="text/css" href="../bootstrap-4.4.1/css/bootstrap.min.css">
   	<script type="text/javascript" src="../bootstrap-4.4.1/js/juqery_latest.js"></script>
   	<script type="text/javascript" src="../bootstrap-4.4.1/js/bootstrap.min.js"></script>
-    <title>Admin Dashboard</title>
+    <title>Books</title>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -68,53 +73,36 @@
         </ul>
       </div>
     </nav><br>
-
     <div class="row">
-        <div class="col-md-3">
-          <div class="card bg-light" style="width : 300px; margin-left:30px">
-            <div class="card-header">Registered Users</div>
-            <div class="card-body">
-              <p class="card-text">No. of total users: <?php echo "".get_user_count(); ?></p>
-              <a href="reg_users.php" class="btn btn-primary" target="_blank">View Registered Users</a>
-            </div>
-          </div>
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <form>
+                <table class="table-bordered" width="900px" style="text-align: center;">
+                    <tr>
+                        <th>ISBN</th>
+                        <th>Book</th>
+                        <th>Author</th>
+                        <th>Category</th>
+                        <th>No. of copies</th>
+                        <th>Price</th>
+                    </tr>
+                    <?php
+                        $query_run = mysqli_query($connection, $query);
+                        while($row=mysqli_fetch_assoc($query_run))
+                        {
+                            $isbn=$row['isbn'];
+                            $book_name=$row['book_name'];
+                            $author_name=$row['author_name']; 
+                            $category=$row['category']; 
+                            $copies=$row['copies']; 
+                            $price=$row['price'];
+                            echo "<tr><td>$isbn</td><td>$book_name</td><td>$author_name</td><td>$category</td><td>$copies</td><td>$price</td></tr>";
+                        }
+                    ?>
+                </table>
+            </form>
         </div>
-        <div class="col-md-3">
-          <div class="card bg-light" style="width : 300px; margin-left:30px">
-            <div class="card-header">Registered Books</div>
-            <div class="card-body">
-              <p class="card-text">No. of available books: <?php echo "".get_book_count(); ?></p>
-              <a href="reg_books.php" class="btn btn-danger" target="_blank">View Registered Books</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-3">
-          <div class="card bg-light" style="width : 300px; margin-left:30px">
-            <div class="card-header">Registered Categories</div>
-            <div class="card-body">
-              <p class="card-text">No. of total categories: <?php echo "".get_category_count(); ?></p>
-              <a href="reg_categories.php" class="btn btn-primary" target="_blank">View Categories</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-3">
-          <div class="card bg-light" style="width : 300px; margin-left:30px">
-            <div class="card-header">Registered Authors</div>
-            <div class="card-body">
-              <p class="card-text">No. of authors: <?php echo "".get_author_count(); ?></p>
-              <a href="reg_authors.php" class="btn btn-danger" target="_blank">View Registered Authors</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-3">
-          <div class="card bg-light" style="width : 300px; margin-left:30px; margin-top: 50px;">
-            <div class="card-header">Issued Books</div>
-            <div class="card-body">
-              <p class="card-text">No. of issued books: <?php echo "".get_issue_count(); ?></p>
-              <a href="reg_issued.php" class="btn btn-success" target="_blank">View Issued Books</a>
-            </div>
-          </div>
-        </div>
+        <div class="col-md-2"></div>
     </div>
 </body>
 </html>

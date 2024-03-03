@@ -1,6 +1,9 @@
 <?php
   require('functions.php');
 	session_start();
+    $connection = mysqli_connect('localhost', 'root', '', 'lms_main');
+    $name = ""; $book="";
+    $query = "select authors.author_name as name, books.book_name as book from authors left join books on authors.author_id = books.author_id";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -10,7 +13,7 @@
     <link rel="stylesheet" type="text/css" href="../bootstrap-4.4.1/css/bootstrap.min.css">
   	<script type="text/javascript" src="../bootstrap-4.4.1/js/juqery_latest.js"></script>
   	<script type="text/javascript" src="../bootstrap-4.4.1/js/bootstrap.min.js"></script>
-    <title>Admin Dashboard</title>
+    <title>Authors and Books</title>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -68,53 +71,28 @@
         </ul>
       </div>
     </nav><br>
-
     <div class="row">
-        <div class="col-md-3">
-          <div class="card bg-light" style="width : 300px; margin-left:30px">
-            <div class="card-header">Registered Users</div>
-            <div class="card-body">
-              <p class="card-text">No. of total users: <?php echo "".get_user_count(); ?></p>
-              <a href="reg_users.php" class="btn btn-primary" target="_blank">View Registered Users</a>
-            </div>
-          </div>
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <form>
+                <table class="table-bordered" width="900px" style="text-align: center;">
+                    <tr>
+                        <th>Author</th>
+                        <th>Book</th>
+                    </tr>
+                    <?php
+                        $query_run = mysqli_query($connection, $query);
+                        while($row=mysqli_fetch_assoc($query_run))
+                        {
+                            $name = $row['name'];
+                            $book = $row['book'];
+                            echo "<tr><td>$name</td><td>$book</td></tr>";
+                        }
+                    ?>
+                </table>
+            </form>
         </div>
-        <div class="col-md-3">
-          <div class="card bg-light" style="width : 300px; margin-left:30px">
-            <div class="card-header">Registered Books</div>
-            <div class="card-body">
-              <p class="card-text">No. of available books: <?php echo "".get_book_count(); ?></p>
-              <a href="reg_books.php" class="btn btn-danger" target="_blank">View Registered Books</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-3">
-          <div class="card bg-light" style="width : 300px; margin-left:30px">
-            <div class="card-header">Registered Categories</div>
-            <div class="card-body">
-              <p class="card-text">No. of total categories: <?php echo "".get_category_count(); ?></p>
-              <a href="reg_categories.php" class="btn btn-primary" target="_blank">View Categories</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-3">
-          <div class="card bg-light" style="width : 300px; margin-left:30px">
-            <div class="card-header">Registered Authors</div>
-            <div class="card-body">
-              <p class="card-text">No. of authors: <?php echo "".get_author_count(); ?></p>
-              <a href="reg_authors.php" class="btn btn-danger" target="_blank">View Registered Authors</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-3">
-          <div class="card bg-light" style="width : 300px; margin-left:30px; margin-top: 50px;">
-            <div class="card-header">Issued Books</div>
-            <div class="card-body">
-              <p class="card-text">No. of issued books: <?php echo "".get_issue_count(); ?></p>
-              <a href="reg_issued.php" class="btn btn-success" target="_blank">View Issued Books</a>
-            </div>
-          </div>
-        </div>
+        <div class="col-md-2"></div>
     </div>
 </body>
 </html>
