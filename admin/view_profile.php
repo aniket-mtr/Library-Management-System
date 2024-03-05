@@ -32,7 +32,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
 			<div class="navbar-header">
-				<a class="navbar-brand" href="user_dashboard.php">Library Management System</a>
+				<a class="navbar-brand" href="admin_dashboard.php">Library Management System</a>
 			</div>
         <font style="color : white"><span><strong><?php echo "WELCOME: ".$_SESSION['name']; ?></strong></span></font>
 		    <ul class="nav navbar-nav navbar-right">

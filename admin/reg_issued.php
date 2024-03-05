@@ -54,22 +54,22 @@ $query = "SELECT b.isbn as isbn, b.book_name as book_name, u.id as user_id, u.na
           <li class="nav-item dropdown">
             <a href="" class="nav-link dropdown-toggle" data-toggle="dropdown">Books</a>
             <div class="dropdown-menu">
-              <a href="" class="dropdown-item">Add New Book</a>
-              <a href="" class="dropdown-item">Manage Books</a>
+              <a href="add_book.php" class="dropdown-item">Add New Book</a>
+              <a href="manage_book.php" class="dropdown-item">Manage Books</a>
             </div>
           </li>
           <li class="nav-item dropdown">
             <a href="" class="nav-link dropdown-toggle" data-toggle="dropdown">Categories</a>
             <div class="dropdown-menu">
-              <a href="" class="dropdown-item">Add New Category</a>
-              <a href="" class="dropdown-item">Manage Categories</a>
+              <a href="add_category.php" class="dropdown-item">Add New Category</a>
+              <!-- <a href="" class="dropdown-item">Manage Categories</a> -->
             </div>
           </li>
           <li class="nav-item dropdown">
             <a href="" class="nav-link dropdown-toggle" data-toggle="dropdown">Authors</a>
             <div class="dropdown-menu">
-              <a href="" class="dropdown-item">Add New Authors</a>
-              <a href="" class="dropdown-item">Manage Authors</a>
+              <a href="add_author.php" class="dropdown-item">Add New Authors</a>
+              <!-- <a href="" class="dropdown-item">Manage Authors</a> -->
             </div>
           </li>
           <li class="nav-item">

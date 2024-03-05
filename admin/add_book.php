@@ -1,9 +1,6 @@
 <?php
   require('functions.php');
 	session_start();
-    $connection = mysqli_connect('localhost', 'root', '', 'lms_main');
-    $category = ""; $name = "";
-    $query = "select category.category_name as category, books.book_name as name from category left join books on category.category_id = books.category_id";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -13,7 +10,7 @@
     <link rel="stylesheet" type="text/css" href="../bootstrap-4.4.1/css/bootstrap.min.css">
   	<script type="text/javascript" src="../bootstrap-4.4.1/js/juqery_latest.js"></script>
   	<script type="text/javascript" src="../bootstrap-4.4.1/js/bootstrap.min.js"></script>
-    <title>Book Categories</title>
+    <title>Add Books</title>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -71,28 +68,36 @@
         </ul>
       </div>
     </nav><br>
+
     <div class="row">
-        <div class="col-md-2"></div>
-        <div class="col-md-8">
-            <form>
-                <table class="table-bordered" width="900px" style="text-align: center;">
-                    <tr>
-                        <th>Category</th>
-                        <th>Book</th>
-                    </tr>
-                    <?php
-                        $query_run = mysqli_query($connection, $query);
-                        while($row=mysqli_fetch_assoc($query_run))
-                        {
-                            $name = $row['name'];
-                            $category = $row['category'];
-                            echo "<tr><td>$category</td><td>$name</td></tr>";
-                        }
-                    ?>
-                </table>
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <form action="" method="post">
+                <div class="form-group">
+                    <label for="book_name">Name of Book: </label>
+                    <input type="text" class="form-control" name="book_name" required>
+                </div>
+                <div class="form-group">
+                    <label for="author_name">Name of Author: </label>
+                    <input type="text" class="form-control" name="author_name" required>
+                </div>
+                <div class="form-group">
+                    <label for="category">Category: </label>
+                    <input type="text" class="form-control" name="category" required>
+                </div>
+                <div class="form-group">
+                    <label for="price">Price: </label>
+                    <input type="text" class="form-control" name="price" required>
+                </div>
+                <div class="form-group">
+                    <label for="copies">Number of Copies: </label>
+                    <input type="text" class="form-control" name="copies" required>
+                </div>
+                <center><button class="btn btn-primary" type="submit">Add Book</button></center>
             </form>
         </div>
-        <div class="col-md-2"></div>
+        <div class="col-md-4"></div>
     </div>
+    
 </body>
 </html>
