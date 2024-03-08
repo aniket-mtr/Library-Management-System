@@ -10,7 +10,7 @@
     <link rel="stylesheet" type="text/css" href="../bootstrap-4.4.1/css/bootstrap.min.css">
   	<script type="text/javascript" src="../bootstrap-4.4.1/js/juqery_latest.js"></script>
   	<script type="text/javascript" src="../bootstrap-4.4.1/js/bootstrap.min.js"></script>
-    <title>Add Books</title>
+    <title>Issue Books</title>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -79,21 +79,36 @@
                 </div>
                 <div class="form-group">
                     <label for="author_name">Name of Author: </label>
-                    <input type="text" class="form-control" name="author_name" required>
+                   <select name="book_author" id="" class="form-control">
+                        <option>-Select Author-</option>
+                        <?php
+                            $connection = mysqli_connect('localhost', 'root', '', 'lms_main') or die('connection failed');
+                            $db =mysqli_select_db($connection, 'lms_main');
+                            $email = $_POST['email'];
+                            $query = "SELECT `author_name` FROM `authors`;";
+                            $query_run = mysqli_query($connection, $query);
+                            while($row=mysqli_fetch_assoc($query_run))
+                            {
+                                ?>
+                                <option><?php echo $row['author_name']; ?></option>
+                                <?php
+                            }
+                        ?>
+                   </select>
                 </div>
                 <div class="form-group">
-                    <label for="category">Category: </label>
-                    <input type="text" class="form-control" name="category" required>
+                    <label for="isbn">Book ISBN: </label>
+                    <input type="text" class="form-control" name="isbn" required>
                 </div>
                 <div class="form-group">
-                    <label for="price">Price: </label>
-                    <input type="text" class="form-control" name="price" required>
+                    <label for="id">User ID: </label>
+                    <input type="text" class="form-control" name="id" required>
                 </div>
                 <div class="form-group">
-                    <label for="copies">Number of Copies: </label>
-                    <input type="text" class="form-control" name="copies" required>
+                    <label for="issue_date">Issue Date: </label>
+                    <input type="text" class="form-control" name="issue_date" value="<?php echo date('d-m-y')?>" required>
                 </div>
-                <center><button class="btn btn-primary" type="submit" name="add_book">Add Book</button></center>
+                <center><button class="btn btn-primary" type="submit">Issue Book</button></center>
             </form>
         </div>
         <div class="col-md-4"></div>
@@ -101,55 +116,3 @@
     
 </body>
 </html>
-<?php
-if (isset($_POST['add_book'])) {
-    $connection = mysqli_connect('localhost', 'root', '', 'lms_main') or die('connection failed');
-    $db = mysqli_select_db($connection, 'lms_main');
-    
-    // Insert author only if it doesn't exist
-    // $query1 = "INSERT IGNORE INTO authors (author_name) VALUES ('$_POST[author_name]');";   
-    $query1 = "INSERT INTO authors (author_id, author_name)
-    SELECT null, '$_POST[author_name]'
-    WHERE NOT EXISTS (
-        SELECT 1 FROM authors WHERE author_name = '$_POST[author_name]'
-    );" ;
-    // Insert category only if it doesn't exist
-    // $query2 = "INSERT IGNORE INTO category (category_name) VALUES ('$_POST[category]');";
-    $query2 = "INSERT INTO category (category_id, category_name)
-    SELECT null, '$_POST[category]'
-    WHERE NOT EXISTS (
-        SELECT 1 FROM category WHERE category_name = '$_POST[category]'
-    );" ;
-
-    // $query3 = "INSERT INTO books (isbn, book_name, book_copies, book_price) VALUES (null, '$_POST[book_name]', '$_POST[copies]', '$_POST[price]')";
-    // $query3 = "INSERT INTO books  VALUES (null, '$_POST[book_name]', (SELECT author_id FROM authors WHERE author_name = '$_POST[author_name]'), (SELECT category_id FROM category WHERE category_name = '$_POST[category]'), '$_POST[copies]', '$_POST[price]')";
-    // $query3 = "INSERT INTO books (isbn, book_name, author_id, category_id, book_copies, book_price)
-    //        SELECT null, '$_POST[book_name]', a.author_id, c.category_id, '$_POST[copies]', '$_POST[price]'
-    //        FROM authors a, category c
-    //        WHERE a.author_name = '$_POST[author_name]'
-    //          AND c.category_name = '$_POST[category]'
-    //        LIMIT 1;";
-
-          $query3 = "INSERT INTO books (isbn, book_name, author_id, category_id, book_copies, book_price)
-           SELECT null, '$_POST[book_name]', a.author_id, c.category_id, '$_POST[copies]', '$_POST[price]'
-           FROM authors a, category c
-           WHERE a.author_name = '$_POST[author_name]'
-             AND c.category_name = '$_POST[category]'
-             AND NOT EXISTS (
-                 SELECT 1 FROM books b
-                 WHERE b.book_name = '$_POST[book_name]'
-             )
-           LIMIT 1;";
-
-
-    // $query4 = "UPDATE books SET category_id = (SELECT category_id FROM category WHERE category_name = '$_POST[category]')";
-    // $query5 = "UPDATE books SET author_id = (SELECT author_id FROM authors WHERE author_name = '$_POST[author_name]')";
-
-    $query_run1 = mysqli_query($connection, $query1);
-    $query_run2 = mysqli_query($connection, $query2);
-    $query_run3 = mysqli_query($connection, $query3);
-    // $query_run4 = mysqli_query($connection, $query4);
-    // $query_run5 = mysqli_query($connection, $query5);
-}
-?>
-  <script>alert('added book')</script>"

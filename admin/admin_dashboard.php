@@ -63,7 +63,7 @@
             </div>
           </li>
           <li class="nav-item">
-            <a href="admin_dashboard.php" class="nav-link">Issue Books</a>
+            <a href="issue_book.php" class="nav-link">Issue Books</a>
           </li>
         </ul>
       </div>

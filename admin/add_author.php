@@ -51,7 +51,7 @@
           <li class="nav-item dropdown">
             <a href="" class="nav-link dropdown-toggle" data-toggle="dropdown">Categories</a>
             <div class="dropdown-menu">
-              <a href="add_category.php" class="dropdown-item">Add New Category</a>
+              <a href="add_author.php" class="dropdown-item">Add New author</a>
               <!-- <a href="" class="dropdown-item">Manage Categories</a> -->
             </div>
           </li>
@@ -63,7 +63,7 @@
             </div>
           </li>
           <li class="nav-item">
-            <a href="admin_dashboard.php" class="nav-link">Issue Books</a>
+            <a href="issue_book.php" class="nav-link">Issue Books</a>
           </li>
         </ul>
       </div>
@@ -74,10 +74,10 @@
         <div class="col-md-4">
             <form action="" method="post">
                 <div class="form-group">
-                    <label for="book_name">Author Name: </label>
-                    <input type="text" class="form-control" name="book_name" required>
+                    <label for="author_name">Author Name: </label>
+                    <input type="text" class="form-control" name="author_name" required>
                 </div>
-                <center><button class="btn btn-primary" type="submit">Add Author</button></center>
+                <center><button class="btn btn-primary" type="submit" name="add_author">Add Author</button></center>
             </form>
         </div>
         <div class="col-md-4"></div>
@@ -85,3 +85,14 @@
     
 </body>
 </html>
+<?php
+  if (isset($_POST['add_author'])) {
+    $connection = mysqli_connect('localhost', 'root', '', 'lms_main') or die('connection failed');
+    $db = mysqli_select_db($connection, 'lms_main');
+    $query = "insert into authors (author_id, author_name) select null, '$_POST[author_name]' where not exists (select 1 from authors where author_name = '$_POST[author_name]');";
+    if(mysqli_query($connection, $query))
+    {
+      echo "<script>alert('added author')</script>";
+    }
+  }
+?>

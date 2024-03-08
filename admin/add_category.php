@@ -63,7 +63,7 @@
             </div>
           </li>
           <li class="nav-item">
-            <a href="admin_dashboard.php" class="nav-link">Issue Books</a>
+            <a href="issue_book.php" class="nav-link">Issue Books</a>
           </li>
         </ul>
       </div>
@@ -74,10 +74,10 @@
         <div class="col-md-4">
             <form action="" method="post">
                 <div class="form-group">
-                    <label for="book_name">Category Name: </label>
-                    <input type="text" class="form-control" name="book_name" required>
+                    <label for="category">Category Name: </label>
+                    <input type="text" class="form-control" name="category" required>
                 </div>
-                <center><button class="btn btn-primary" type="submit">Add Category</button></center>
+                <center><button class="btn btn-primary" type="submit" name="add_category">Add Category</button></center>
             </form>
         </div>
         <div class="col-md-4"></div>
@@ -85,3 +85,14 @@
     
 </body>
 </html>
+<?php
+  if (isset($_POST['add_category'])) {
+    $connection = mysqli_connect('localhost', 'root', '', 'lms_main') or die('connection failed');
+    $db = mysqli_select_db($connection, 'lms_main');
+    $query = "insert into category (category_id, category_name) select null, '$_POST[category]' where not exists (select 1 from category where category_name = '$_POST[category]');";
+    if(mysqli_query($connection, $query))
+    {
+      echo "<script>alert('added category')</script>";
+    }
+  }
+?>
