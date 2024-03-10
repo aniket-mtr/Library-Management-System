@@ -150,6 +150,7 @@ if (isset($_POST['add_book'])) {
     $query_run3 = mysqli_query($connection, $query3);
     // $query_run4 = mysqli_query($connection, $query4);
     // $query_run5 = mysqli_query($connection, $query5);
+    echo "<script>alert('added book')</script>";
 }
 ?>
-  <script>alert('added book')</script>"
+
