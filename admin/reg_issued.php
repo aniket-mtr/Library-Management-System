@@ -72,9 +72,9 @@ $query = "SELECT b.isbn as isbn, b.book_name as book_name, u.id as user_id, u.na
               <!-- <a href="" class="dropdown-item">Manage Authors</a> -->
             </div>
           </li>
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a href="admin_dashboard.php" class="nav-link">Issue Books</a>
-          </li>
+          </li> -->
         </ul>
       </div>
     </nav><br>

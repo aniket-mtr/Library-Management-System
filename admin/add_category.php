@@ -62,9 +62,9 @@
               <!-- <a href="" class="dropdown-item">Manage Authors</a> -->
             </div>
           </li>
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a href="issue_book.php" class="nav-link">Issue Books</a>
-          </li>
+          </li> -->
         </ul>
       </div>
     </nav><br>
