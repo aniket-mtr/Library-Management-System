@@ -1,26 +1,11 @@
+<!-- show author name, book name and category -->
 <?php
 	session_start();
-  function get_user_issued_book_count(){
-    $connection = mysqli_connect('localhost', 'root', '', 'lms_main') or die('connection failed');
-    $book_count = 0;
-    $query = "select count(*) as book_count from issued_books where user_id = $_SESSION[id];";
-    $query_run = mysqli_query($connection, $query);
-    while($row = mysqli_fetch_assoc($query_run)){
-      $book_count = $row['book_count'];
-    }
-    return $book_count;
-  }
-
-  function get_total_book_count(){
-    $connection = mysqli_connect('localhost', 'root', '', 'lms_main') or die('connection failed');
-    $book_count = 0;
-    $query = "select count(*) as book_count from books;";
-    $query_run = mysqli_query($connection, $query);
-    while($row = mysqli_fetch_assoc($query_run)){
-      $book_count = $row['book_count'];
-    }
-    return $book_count;
-  }
+    $connection = mysqli_connect('localhost', 'root', '', 'lms_main');
+    $book_name = ""; $author_name = ""; $category = "";
+        $query = "select books.book_name as book_name, authors.author_name as author_name, category.category_name as category
+                from books left join authors on books.author_id = authors.author_id
+                left join category on books.category_id = category.category_id";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -30,7 +15,7 @@
     <link rel="stylesheet" type="text/css" href="bootstrap-4.4.1/css/bootstrap.min.css">
   	<script type="text/javascript" src="bootstrap-4.4.1/js/juqery_latest.js"></script>
   	<script type="text/javascript" src="bootstrap-4.4.1/js/bootstrap.min.js"></script>
-    <title>User Dashboard</title>
+    <title>Issued Books</title>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -67,24 +52,36 @@
         </ul>
       </div>
     </nav><br>
-
+    
     <div class="row">
-    <div class="" style="display: flex;">
-          <div class="card bg-light" style="width : 300px; margin-left:30px">
-            <div class="card-header">Issued Books</div>
-            <div class="card-body">
-              <p class="card-text">No. of issued books: <?php  echo get_user_issued_book_count();?></p>
-              <a href="view_issued_books.php" class="btn btn-primary" target="_blank">View Issued Books</a>
-            </div>
-          </div>
-          <div class="card bg-light" style="width : 300px; margin-left:30px">
-            <div class="card-header">All available books</div>
-            <div class="card-body">
-              <p class="card-text">No. of available books: <?php  echo get_total_book_count();?></p>
-              <a href="view_available_books.php" class="btn btn-secondary" target="_blank">View Issued Books</a>
-            </div>
-          </div>
-    </div>
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <form>
+                <table class="table-bordered" width="900px" style="text-align: center;">
+                    <tr>
+                        <th>Book</th>
+                        <th>Author</th>
+                        <th>Category</th>
+                    </tr>
+                    <?php
+                        $query_run = mysqli_query($connection, $query);
+                        while ($row = mysqli_fetch_assoc($query_run)) {
+                            $book_name = $row['book_name'];
+                            $author_name = $row['author_name'];
+                            $category = $row['category'];
+                                    
+                            // Output the data
+                            echo "<tr>
+                                <td>$book_name</td>
+                                <td>$author_name</td>
+                                <td>$category</td>
+                                </tr>";
+                        }
+                    ?>
+                </table>
+            </form>
+        </div>
+        <div class="col-md-2"></div>
     </div>
 </body>
 </html>

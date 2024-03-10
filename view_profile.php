@@ -49,6 +49,18 @@
               </li>
 		    </ul>
 		</div>
+    </nav>
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
+      <div class="container-fluid">
+        <ul class="nav navbar-nav navbar-center">
+          <li class="nav-item">
+            <a href="user_dashboard.php" class="nav-link">Dashboard</a>
+          </li>
+          <li class="nav-item">
+            <a href="issue_book.php" class="nav-link">Issue Books</a>
+          </li>
+        </ul>
+      </div>
     </nav><br>
     <div class="row">
         <div class="col-md-4"></div>
