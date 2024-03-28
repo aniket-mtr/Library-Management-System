@@ -51,7 +51,7 @@
           <li class="nav-item dropdown">
             <a href="" class="nav-link dropdown-toggle" data-toggle="dropdown">Categories</a>
             <div class="dropdown-menu">
-              <a href="add_author.php" class="dropdown-item">Add New author</a>
+              <a href="add_category.php" class="dropdown-item">Add New category</a>
               <!-- <a href="" class="dropdown-item">Manage Categories</a> -->
             </div>
           </li>
