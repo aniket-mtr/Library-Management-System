@@ -75,7 +75,6 @@
                             $issue_date = $row['issue_date'];
                             $due_date = $row['due_date'];
                         
-                    
                             // Determine return status based on due date
                             $return_status = ($current_date > $due_date) ? "Not Returned" : "Returned";
                     

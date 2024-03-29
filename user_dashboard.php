@@ -81,7 +81,7 @@
             <div class="card-header">All available books</div>
             <div class="card-body">
               <p class="card-text">No. of available books: <?php  echo get_total_book_count();?></p>
-              <a href="view_available_books.php" class="btn btn-secondary" target="_blank">View Issued Books</a>
+              <a href="view_available_books.php" class="btn btn-secondary" target="_blank">View Available Books</a>
             </div>
           </div>
     </div>

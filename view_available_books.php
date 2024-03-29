@@ -15,7 +15,7 @@
     <link rel="stylesheet" type="text/css" href="bootstrap-4.4.1/css/bootstrap.min.css">
   	<script type="text/javascript" src="bootstrap-4.4.1/js/juqery_latest.js"></script>
   	<script type="text/javascript" src="bootstrap-4.4.1/js/bootstrap.min.js"></script>
-    <title>Issued Books</title>
+    <title>Available Books</title>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
