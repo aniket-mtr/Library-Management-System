@@ -57,7 +57,7 @@
                 <!-- Email -->
 				<div class="form-group">
 					<label for="email">Email ID:</label>
-					<input type="text" name="email" class="form-control" required>
+					<input type="email" name="email" class="form-control" required>
 				</div>
                 <!-- Password -->
 				<div class="form-group">
