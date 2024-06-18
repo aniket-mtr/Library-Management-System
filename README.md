@@ -21,6 +21,11 @@ also the books that have not been returned yet.
   to that folder
 - After installation, run XAMPP and click on start buttons next to the 'Apache' option and 'MySQL' option to start 
 the Apache web server and a MySQL database server on your local machine respectively
+- Create a new database in your MySQL server
+- Import the `lms_main.sql` file:
+   ```sh
+   mysql -u username -p database_name < path/to/lms_main.sql
+
 - Accessing http://localhost in your browser points to this local server, allowing you to 
 test your web application
 - On the browser type http://localhost/<name_of_folder>
