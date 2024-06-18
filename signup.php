@@ -12,7 +12,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
 			<div class="navbar-header">
-				<a class="navbar-brand" href="index.php">Library Management System</a>
+				<a class="navbar-brand" href="user_dashboard.php">Library Management System</a>
 			</div>
 	
 		    <ul class="nav navbar-nav navbar-right">
