@@ -15,7 +15,7 @@ also the books that have not been returned yet.
 ## Steps to start the web application:
 - First clone the repository
   ```sh
-   git clone https://github.com/yourusername/your-repo-name.git 
+   git clone https://github.com/aniket-mtr/Library-Management-System
 - Install XAMPP depending on your operating system
 - Navigate to your xampp folder and create a new folder named 'htdocs' (if not present) and copy the cloned repository
   to that folder
